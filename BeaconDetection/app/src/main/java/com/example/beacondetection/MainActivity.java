@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private BeaconManager beaconManager = null;
     protected static final String TAG = "MonitoringActivity";
 
+    public static final int test = 3; // Delete!!!!!!!!!!!!!!!!!
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
