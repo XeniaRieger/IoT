@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView text_message;
     private EditText username;
 
-    //aaaaaaaaa
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
 
