@@ -7,12 +7,17 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/base_photo"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="28dp" />
+        android:id="@+id/background"
+        android:layout_width="430dp"
+        android:layout_height="761dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.428"
+        app:srcCompat="@drawable/base_photo" />
 
     <TextView
         android:id="@+id/text_message"
@@ -53,7 +58,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/apptitle"
         android:layout_width="293dp"
         android:layout_height="49dp"
         android:gravity="center"
@@ -62,5 +67,22 @@
         android:textSize="25sp"
         tools:layout_editor_absoluteX="59dp"
         tools:layout_editor_absoluteY="302dp" />
+
+    <Button
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="314dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="731dp"
+        android:background="#3F51B5"
+        android:text="Menu"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintEnd_toEndOf="@+id/background"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.218" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
