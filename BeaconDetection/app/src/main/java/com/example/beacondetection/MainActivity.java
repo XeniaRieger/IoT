@@ -10,7 +10,10 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.altbeacon.beacon.Beacon;
@@ -25,12 +28,17 @@ import java.util.Collection;
 public class MainActivity extends AppCompatActivity {
     private TextView text_message;
     private EditText username;
+    private Button menu;
+    private ImageView background;
+    private TextView apptitle;
 
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
 
     private BeaconManager beaconManager = null;
     protected static final String TAG = "MonitoringActivity";
+
+    private String name = username.toString();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +47,24 @@ public class MainActivity extends AppCompatActivity {
 
         text_message = (TextView) findViewById(R.id.text_message);
         username = (EditText) findViewById(R.id.username);
+        menu = (Button) findViewById(R.id.menu);
+        background = (ImageView) findViewById(R.id.background);
+        apptitle = (TextView) findViewById(R.id.apptitle);
 
         beaconManager = BeaconManager.getInstanceForApplication(this);
+
+        // menu button
+        menu.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                background.setVisibility(View.INVISIBLE);
+                apptitle.setVisibility(View.INVISIBLE);
+                menu.setVisibility(View.INVISIBLE);
+                username.setVisibility(View.INVISIBLE);
+                text_message.setVisibility(View.INVISIBLE);
+            }
+        });
 
         // ask for permission to use location
         // check if SDK is new enough
