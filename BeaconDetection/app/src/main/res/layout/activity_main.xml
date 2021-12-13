@@ -7,16 +7,14 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/background"
-        android:layout_width="430dp"
-        android:layout_height="761dp"
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.428"
         app:srcCompat="@drawable/base_photo" />
 
     <TextView
@@ -31,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.812" />
+        app:layout_constraintVertical_bias="0.88" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -41,48 +39,58 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <EditText
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/username"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="166dp"
         android:layout_height="56dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="412dp"
         android:layout_marginEnd="101dp"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
-        android:text="Username"
+        android:hint="Username"
+        android:textColorHint="#FFFFFF"
         android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.536" />
 
     <TextView
-        android:id="@+id/apptitle"
+        android:id="@+id/textView"
         android:layout_width="293dp"
         android:layout_height="49dp"
         android:gravity="center"
         android:text="StudentTracker"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
-        tools:layout_editor_absoluteX="59dp"
-        tools:layout_editor_absoluteY="302dp" />
-
-    <Button
-        android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="314dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="731dp"
-        android:background="#3F51B5"
-        android:text="Menu"
-        app:layout_constraintBottom_toBottomOf="@+id/background"
-        app:layout_constraintEnd_toEndOf="@+id/background"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.218" />
+        app:layout_constraintVertical_bias="0.442" />
+
+    <ImageView
+        android:id="@+id/success_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/text_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:srcCompat="@drawable/success_icon" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/loading_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/loading_icon"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/text_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
