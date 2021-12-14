@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         BackgroundImage = (ImageView) findViewById(R.id.BackgroundImage);
         LogoTitle = (TextView) findViewById(R.id.LogoTitle);
         SuccessIcon = (ImageView) findViewById(R.id.SuccessIcon);
-        LoadingIcon = (GifImageView) findViewById((R.id.LoadingIcon);
+        LoadingIcon = (GifImageView) findViewById(R.id.LoadingIcon);
 
         beaconManager = BeaconManager.getInstanceForApplication(this);
 
