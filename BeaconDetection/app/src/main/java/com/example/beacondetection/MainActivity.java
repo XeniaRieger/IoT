@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.altbeacon.beacon.Beacon;
@@ -25,9 +26,16 @@ import org.altbeacon.beacon.Region;
 
 import java.util.Collection;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class MainActivity extends AppCompatActivity {
     private TextView text_message;
     private EditText username;
+
+    private ImageView BackgroundImage;
+    private TextView LogoTitle;
+    private ImageView SuccessIcon;
+    private GifImageView LoadingIcon;
     private Button next_lectures;
     private Button past_lectures;
     private Button account;
@@ -43,8 +51,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        text_message = (TextView) findViewById(R.id.text_message);
-        username = (EditText) findViewById(R.id.username);
+        text_message = (TextView) findViewById(R.id.BeaconMessage);
+        username = (EditText) findViewById(R.id.UsernameBar);
+        BackgroundImage = (ImageView) findViewById(R.id.BackgroundImage);
+        LogoTitle = (TextView) findViewById(R.id.LogoTitle);
+        SuccessIcon = (ImageView) findViewById(R.id.SuccessIcon);
+        LoadingIcon = (GifImageView) findViewById(R.id.LoadingIcon);
         next_lectures = (Button) findViewById(R.id.next_lectures);
         past_lectures = (Button) findViewById(R.id.past_lectures);
         account = (Button) findViewById(R.id.account);
