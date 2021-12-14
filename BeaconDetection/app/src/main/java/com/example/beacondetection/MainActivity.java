@@ -6,10 +6,13 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -25,6 +28,9 @@ import java.util.Collection;
 public class MainActivity extends AppCompatActivity {
     private TextView text_message;
     private EditText username;
+    private Button next_lectures;
+    private Button past_lectures;
+    private Button account;
 
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
@@ -39,6 +45,33 @@ public class MainActivity extends AppCompatActivity {
 
         text_message = (TextView) findViewById(R.id.text_message);
         username = (EditText) findViewById(R.id.username);
+        next_lectures = (Button) findViewById(R.id.next_lectures);
+        past_lectures = (Button) findViewById(R.id.past_lectures);
+        account = (Button) findViewById(R.id.account);
+
+        next_lectures.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next_lec = new Intent(MainActivity.this, NextLectures.class);
+                startActivity(next_lec);
+            }
+        });
+
+        past_lectures.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent past_lec = new Intent(MainActivity.this, PastLectures.class);
+                startActivity(past_lec);
+            }
+        });
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent acc = new Intent(MainActivity.this, Account.class);
+                startActivity(acc);
+            }
+        });
 
         beaconManager = BeaconManager.getInstanceForApplication(this);
 
