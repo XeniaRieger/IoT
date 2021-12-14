@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        text_message = (TextView) findViewById(R.id.text_message);
-        username = (EditText) findViewById(R.id.username);
+        text_message = (TextView) findViewById(R.id.BeaconMessage);
+        username = (EditText) findViewById(R.id.UsernameBar);
 
         beaconManager = BeaconManager.getInstanceForApplication(this);
 

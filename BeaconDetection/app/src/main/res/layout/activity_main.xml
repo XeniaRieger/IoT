@@ -7,17 +7,22 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/BackgroundImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/base_photo"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="28dp" />
+        android:layout_marginTop="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/base_photo" />
 
     <TextView
-        android:id="@+id/text_message"
-        android:layout_width="179dp"
-        android:layout_height="78dp"
+        android:id="@+id/BeaconMessage"
+        android:layout_width="311dp"
+        android:layout_height="87dp"
         android:gravity="center"
         android:text="No beacons!"
         android:textColor="#FFFFFF"
@@ -26,41 +31,63 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.812" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintVertical_bias="0.847" />
 
     <EditText
+        android:id="@+id/UsernameBar"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/username"
         android:layout_width="166dp"
         android:layout_height="56dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="412dp"
-        android:layout_marginEnd="101dp"
         android:ems="10"
         android:gravity="center"
+        android:hint="Username"
         android:inputType="textPersonName"
-        android:text="Username"
         android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/LogoTitle"
         android:layout_width="293dp"
         android:layout_height="49dp"
         android:gravity="center"
         android:text="StudentTracker"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
-        tools:layout_editor_absoluteX="59dp"
-        tools:layout_editor_absoluteY="302dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.425" />
+
+    <ImageView
+        android:id="@+id/SuccessIcon"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.712"
+        app:srcCompat="@drawable/success_icon" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/LoadingIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/loading_icon"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.71" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
