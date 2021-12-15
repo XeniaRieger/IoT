@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.SQLException;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,9 @@ import org.altbeacon.beacon.MonitorNotifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Collection;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -45,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
     private BeaconManager beaconManager = null;
     protected static final String TAG = "MonitoringActivity";
+
+    private static Connection getConnection() throws URISyntaxException, java.sql.SQLException {
+        String dbUrl = System.getenv("mysql://b7e6ab00851195:a2312c6b@eu-cdbr-west-02.cleardb.net/heroku_478575134a3d5df?reconnect=true");
+        return DriverManager.getConnection(dbUrl);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
