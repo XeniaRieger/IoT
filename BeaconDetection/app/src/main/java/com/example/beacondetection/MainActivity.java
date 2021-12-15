@@ -8,7 +8,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.SQLException;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,9 +24,6 @@ import org.altbeacon.beacon.MonitorNotifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
-import java.net.URISyntaxException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.Collection;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -49,11 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
     private BeaconManager beaconManager = null;
     protected static final String TAG = "MonitoringActivity";
-
-    private static Connection getConnection() throws URISyntaxException, java.sql.SQLException {
-        String dbUrl = System.getenv("mysql://b7e6ab00851195:a2312c6b@eu-cdbr-west-02.cleardb.net/heroku_478575134a3d5df?reconnect=true");
-        return DriverManager.getConnection(dbUrl);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,19 +92,19 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (this.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 if (this.checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setTitle("This app needs background location access");
-                        builder.setMessage("Please grant location access so this app can detect beacons in the background.");
-                        builder.setPositiveButton(android.R.string.ok, null);
-                        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("This app needs background location access");
+                    builder.setMessage("Please grant location access so this app can detect beacons in the background.");
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
 
-                            @TargetApi(23)
-                            @Override
-                            public void onDismiss(DialogInterface dialog) {
-                                requestPermissions(new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, PERMISSION_REQUEST_BACKGROUND_LOCATION);
-                            }
-                        });
-                        builder.show();
+                        @TargetApi(23)
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            requestPermissions(new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, PERMISSION_REQUEST_BACKGROUND_LOCATION);
+                        }
+                    });
+                    builder.show();
                 }
             } else {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION}, PERMISSION_REQUEST_FINE_LOCATION);
@@ -128,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void didEnterRegion(Region region) {
                 text_message.setText("Beacon detected!");
+
                 // developer message
                 Log.i(TAG, "I just saw an beacon for the first time!");
             }
