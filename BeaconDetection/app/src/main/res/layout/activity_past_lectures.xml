@@ -44,7 +44,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginBottom="19dp"
         android:gravity="center"
-        android:text="Next Lectures"
+        android:text="Past Lectures"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/scroll"
         app:layout_constraintStart_toEndOf="@+id/back"
