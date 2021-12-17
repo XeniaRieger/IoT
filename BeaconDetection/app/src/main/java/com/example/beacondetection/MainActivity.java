@@ -38,7 +38,6 @@ import com.anthonyfdev.dropdownview.DropDownView;
 
 public class MainActivity extends AppCompatActivity {
     private TextView text_message;
-    private EditText username;
     private ImageView BackgroundImage;
     private TextView LogoTitle;
     private ImageView SuccessIcon;
@@ -47,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private Button menubutton2;
     private Button menubutton3;
     private Button menubutton4;
+    private Button menubutton5;
 
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         text_message = (TextView) findViewById(R.id.BeaconMessage);
-        username = (EditText) findViewById(R.id.UsernameBar);
         BackgroundImage = (ImageView) findViewById(R.id.BackgroundImage);
         LogoTitle = (TextView) findViewById(R.id.LogoTitle);
         SuccessIcon = (ImageView) findViewById(R.id.SuccessIcon);
@@ -78,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         menubutton2 = (Button) inflatedView.findViewById(R.id.menubutton2);
         menubutton3 = (Button) inflatedView.findViewById(R.id.menubutton3);
         menubutton4 = (Button) inflatedView.findViewById(R.id.menubutton4);
+        menubutton5 = (Button) inflatedView.findViewById(R.id.menubutton5);
 
         SuccessIcon.setVisibility(View.INVISIBLE);
 
@@ -185,5 +185,9 @@ public class MainActivity extends AppCompatActivity {
     public void button4(View view) {
         Intent stat = new Intent(MainActivity.this, Statistics.class);
         startActivity(stat);
+    }
+    public void button5(View view) {
+        Intent acc = new Intent(MainActivity.this, Account.class);
+        startActivity(acc);
     }
 }

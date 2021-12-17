@@ -36,5 +36,12 @@
         android:text="Statistics"
         android:onClick="button4"/>
 
+    <Button
+        android:id="@+id/menubutton5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Account"
+        android:onClick="button5"/>
+
 
 </LinearLayout>
