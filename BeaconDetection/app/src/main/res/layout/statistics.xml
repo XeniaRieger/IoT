@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NextLectures">
+    tools:context=".Statistics">
 
     <ImageButton
         android:id="@+id/back"
@@ -49,14 +49,13 @@
         android:id="@+id/titletext"
         android:layout_width="193dp"
         android:layout_height="55dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="56dp"
         android:layout_marginTop="26dp"
-        android:layout_marginBottom="19dp"
         android:gravity="center"
-        android:text="Next Lectures"
+        android:text="My Attendance"
         android:textColor="@color/black"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/scroll"
         app:layout_constraintStart_toEndOf="@+id/back"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,4 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Account"/>
+    tools:context=".Account">
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="26dp"
+        android:backgroundTint="#3F51B5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <TextView
+        android:id="@+id/titletext"
+        android:layout_width="193dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="26dp"
+        android:gravity="center"
+        android:text="Account"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@+id/back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/UsernameBar"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="166dp"
+        android:layout_height="56dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textColorHint="#736D6D"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
