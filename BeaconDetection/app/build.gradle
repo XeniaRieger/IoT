@@ -38,4 +38,5 @@ dependencies {
     implementation 'org.altbeacon:android-beacon-library:2+'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
     implementation 'com.github.AnthonyFermin:DropDownView:1.0.1'
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
 }
