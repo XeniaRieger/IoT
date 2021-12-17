@@ -29,5 +29,12 @@
         android:text="Past lectures"
         android:onClick="button3"/>
 
+    <Button
+        android:id="@+id/menubutton4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Statistics"
+        android:onClick="button4"/>
+
 
 </LinearLayout>

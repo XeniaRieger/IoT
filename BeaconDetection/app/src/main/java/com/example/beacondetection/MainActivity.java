@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private Button menubutton1;
     private Button menubutton2;
     private Button menubutton3;
+    private Button menubutton4;
 
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         menubutton1 = (Button) inflatedView.findViewById(R.id.menubutton1);
         menubutton2 = (Button) inflatedView.findViewById(R.id.menubutton2);
         menubutton3 = (Button) inflatedView.findViewById(R.id.menubutton3);
+        menubutton4 = (Button) inflatedView.findViewById(R.id.menubutton4);
 
         SuccessIcon.setVisibility(View.INVISIBLE);
 
@@ -179,5 +181,9 @@ public class MainActivity extends AppCompatActivity {
     public void button3(View view) {
         Intent past_lec = new Intent(MainActivity.this, PastLectures.class);
         startActivity(past_lec);
+    }
+    public void button4(View view) {
+        Intent stat = new Intent(MainActivity.this, Statistics.class);
+        startActivity(stat);
     }
 }
