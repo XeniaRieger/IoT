@@ -1,5 +1,7 @@
+
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -39,4 +41,13 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
     implementation 'com.github.AnthonyFermin:DropDownView:1.0.1'
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
+
+    implementation 'com.google.firebase:firebase-database:20.0.3'
+    implementation 'com.google.firebase:firebase-analytics:20.0.2'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    /*implementation platform('com.google.firebase:firebase-bom:29.0.3')
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-analytics'*/
 }

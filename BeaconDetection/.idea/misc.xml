@@ -3,11 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/menar/OneDrive/Desktop/IoTprojectG4/BeaconDetection/app/src/main/res/layout/account_items.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/menar/OneDrive/Desktop/IoTprojectG4/BeaconDetection/app/src/main/res/layout/activity_account.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/menar/OneDrive/Desktop/IoTprojectG4/BeaconDetection/app/src/main/res/layout/activity_main.xml" value="0.24139492753623187" />
+        <entry key="..\:/Users/menar/OneDrive/Desktop/IoTprojectG4/BeaconDetection/app/src/main/res/layout/activity_my_courses.xml" value="0.24139492753623187" />
+        <entry key="..\:/Users/menar/OneDrive/Desktop/IoTprojectG4/BeaconDetection/app/src/main/res/layout/activity_next_lectures.xml" value="0.1" />
+        <entry key="..\:/Users/menar/OneDrive/Desktop/IoTprojectG4/BeaconDetection/app/src/main/res/layout/activity_past_lectures.xml" value="0.24139492753623187" />
+        <entry key="..\:/Users/menar/OneDrive/Desktop/IoTprojectG4/BeaconDetection/app/src/main/res/layout/course_items.xml" value="0.24139492753623187" />
+        <entry key="..\:/Users/menar/OneDrive/Desktop/IoTprojectG4/BeaconDetection/app/src/main/res/layout/items.xml" value="0.24139492753623187" />
         <entry key="..\:/Users/menar/OneDrive/Documents/IoT project/BeaconDetectionn/BeaconDetection/app/src/main/res/layout/activity_account.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/menar/OneDrive/Documents/IoT project/BeaconDetectionn/BeaconDetection/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/menar/OneDrive/Documents/IoT project/BeaconDetectionn/BeaconDetection/app/src/main/res/layout/activity_next_lectures.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/menar/OneDrive/Documents/IoT project/BeaconDetectionn/BeaconDetection/app/src/main/res/layout/activity_past_lectures.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/menar/OneDrive/Documents/IoT project/BeaconDetectionn/BeaconDetection/app/src/main/res/layout/content_account.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/menar/OneDrive/Documents/IoTprojectG4/BeaconDetection/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/menar/OneDrive/Documents/IoTprojectG4/BeaconDetection/app/src/main/res/layout/activity_next_lectures.xml" value="0.2" />
+        <entry key="..\:/Users/menar/OneDrive/Documents/IoTprojectG4/BeaconDetection/app/src/main/res/layout/items.xml" value="0.1" />
         <entry key="..\:/Users/user/Desktop/IoT Project Beacon/BeaconDetection/app/src/main/res/layout/activity_main.xml" value="0.1891891891891892" />
         <entry key="..\:/Users/user/Desktop/Project IoT/BeaconDetection/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/xenia/AndroidStudioProjects/BeaconDetection/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />

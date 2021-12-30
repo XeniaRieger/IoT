@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeaconDetection">
         <activity
+            android:name=".MyCourses"
+            android:exported="false" />
+        <activity
             android:name=".PastLectures"
             android:exported="false" />
         <activity

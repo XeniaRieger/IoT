@@ -54,12 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private BeaconManager beaconManager = null;
     protected static final String TAG = "MonitoringActivity";
 
-    /*private static Connection getConnection() throws URISyntaxException, java.sql.SQLException {
-        String dbUrl = System.getenv("mysql://b7e6ab00851195:a2312c6b@eu-cdbr-west-02.cleardb.net/heroku_478575134a3d5df?reconnect=true");
-        return DriverManager.getConnection(dbUrl);
-    }*/
-
-
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +166,8 @@ public class MainActivity extends AppCompatActivity {
         beaconManager.startRangingBeacons(MonitoringRegion);
     }
     public void button1(View view) {
-        Log.i(TAG, "HIIII");
+        Intent courses = new Intent(MainActivity.this, MyCourses.class);
+        startActivity(courses);
     }
     public void button2(View view) {
         Intent next_lec = new Intent(MainActivity.this, NextLectures.class);
