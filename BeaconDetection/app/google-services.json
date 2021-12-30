@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "373868666729",
+    "project_id": "iotprojectg4-79ffa",
+    "storage_bucket": "iotprojectg4-79ffa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373868666729:android:4ad74701fd0671193527f8",
+        "android_client_info": {
+          "package_name": "com.example.beacondetection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373868666729-rk0aaptjc1k6mj9h48ub86fh70p14u8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ5IEOOZpWGyhnIxzH-cXwvIPSm2_7YV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373868666729-rk0aaptjc1k6mj9h48ub86fh70p14u8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
