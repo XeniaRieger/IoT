@@ -166,7 +166,8 @@ public class MainActivity extends AppCompatActivity {
         beaconManager.startRangingBeacons(MonitoringRegion);
     }
     public void button1(View view) {
-        Log.i(TAG, "HIIII");
+        Intent courses = new Intent(MainActivity.this, MyCourses.class);
+        startActivity(courses);
     }
     public void button2(View view) {
         Intent next_lec = new Intent(MainActivity.this, NextLectures.class);

@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.MyViewHolder> {
 
     Context context;
-    ArrayList<Lecture> list;
+    ArrayList<Student> list;
 
-    public MyAdapter(Context context, ArrayList<Lecture> list) {
+    public AccountAdapter(Context context, ArrayList<Student> list) {
         this.context = context;
         this.list = list;
     }
@@ -24,19 +24,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.items,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.account_items,parent,false);
         return  new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        Lecture lecture = list.get(position);
-        holder.course.setText(lecture.getCourse());
-        holder.lecture.setText(lecture.getLecture());
-        holder.date.setText(lecture.getDate());
-        holder.time.setText(lecture.getTime());
-        holder.room.setText(lecture.getRoom());
+        Student student = list.get(position);
+        holder.username.setText(student.getUsername());
+        holder.name.setText(student.getName());
+        holder.surname.setText(student.getSurname());
+        holder.age.setText(student.getAge());
 
     }
 
@@ -47,16 +46,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView course, lecture, date, time, room;
+        TextView username, name, surname, age;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            course = itemView.findViewById(R.id.course);
-            lecture = itemView.findViewById(R.id.lecture);
-            date = itemView.findViewById(R.id.date);
-            time = itemView.findViewById(R.id.time);
-            room = itemView.findViewById(R.id.room);
+            username = itemView.findViewById(R.id.username);
+            name = itemView.findViewById(R.id.name);
+            surname = itemView.findViewById(R.id.surname);
+            age = itemView.findViewById(R.id.age);
 
         }
     }

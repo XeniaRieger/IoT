@@ -1,6 +1,6 @@
 package com.example.beacondetection;
 
-public class Lecture {
+public class Lecture implements Comparable<Lecture> {
 
     private String course, lecture, date, time, room;
 
@@ -42,5 +42,10 @@ public class Lecture {
 
     public String getRoom() {
         return room;
+    }
+
+    @Override
+    public int compareTo(Lecture o) {
+        return (this.getDate()).compareTo(o.getDate());
     }
 }
