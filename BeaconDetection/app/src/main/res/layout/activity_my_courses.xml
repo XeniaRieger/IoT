@@ -43,8 +43,10 @@
         android:id="@+id/list"
         android:layout_width="362dp"
         android:layout_height="580dp"
+        android:layout_below="@+id/titletext"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="31dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="43dp" />
 

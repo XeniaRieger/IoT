@@ -153,7 +153,8 @@ public class MainActivity extends AppCompatActivity {
                     if(beacon.getDistance() < 2) {
                         SuccessIcon.setVisibility(View.VISIBLE);
                         LoadingIcon.setVisibility(View.INVISIBLE);
-                        text_message.setText("Attending lecture in room " + beacons.iterator().next().getId2() + "!");
+                        text_message.setText("Attending lecture in room " + beacons.iterator().next().getId2().toString() + "!");
+                        // room number = beacons.iterator().next().getId2()
                     }
                     // developer message
                     Log.i(TAG, "The beacon I see is about "+beacon.getDistance()+" meters away.");
