@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +30,7 @@ public class Account extends AppCompatActivity {
     private RecyclerView recycler;
     private AccountAdapter ad;
     private ArrayList<Student> list;
+    private EditText username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,9 @@ public class Account extends AppCompatActivity {
 
         back = (ImageButton) findViewById(R.id.back);
         recycler = (RecyclerView) findViewById(R.id.list);
+        // get username
+        View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
+        username = (EditText) inflatedView.findViewById(R.id.username);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +57,7 @@ public class Account extends AppCompatActivity {
         ad = new AccountAdapter(this, list);
         recycler.setAdapter(ad);
 
-        String path = "Student/dile9663";
+        String path = "Student/" + username.getText().toString();
 
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
         //Toast.makeText(this, "Firebase connection successful", Toast.LENGTH_LONG).show();

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +29,7 @@ public class NextLectures extends AppCompatActivity {
     private LectureAdapter ad;
     public static ArrayList<Lecture> list;
     public SimpleDateFormat df;
+    private EditText username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,9 @@ public class NextLectures extends AppCompatActivity {
         back = (ImageButton) findViewById(R.id.back);
         recycler = (RecyclerView) findViewById(R.id.list);
         df = new SimpleDateFormat("dd/MM/yyyy");
+        // get username
+        View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
+        username = (EditText) inflatedView.findViewById(R.id.username);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +57,9 @@ public class NextLectures extends AppCompatActivity {
         ad = new LectureAdapter(this, list);
         recycler.setAdapter(ad);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference("Lectures/dile9663");
+        String path = "Lectures/"  + username.getText().toString();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
         //Toast.makeText(this, "Firebase connection successful", Toast.LENGTH_LONG).show();
 
         reference.addValueEventListener(new ValueEventListener() {
