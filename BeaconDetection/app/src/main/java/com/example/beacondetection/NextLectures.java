@@ -26,7 +26,7 @@ public class NextLectures extends AppCompatActivity {
     private ImageButton back;
     private RecyclerView recycler;
     private LectureAdapter ad;
-    private ArrayList<Lecture> list;
+    public static ArrayList<Lecture> list;
     public SimpleDateFormat df;
 
     @Override

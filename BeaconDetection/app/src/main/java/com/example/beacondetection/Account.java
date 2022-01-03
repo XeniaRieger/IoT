@@ -65,14 +65,6 @@ public class Account extends AppCompatActivity {
                 student.setSurname(snapshot.child("surname").getValue().toString());
                 student.setAge(snapshot.child("age").getValue().toString());
                 list.add(student);
-                /*for(DataSnapshot snap: snapshot.getChildren()) {
-                    Student student = new Student();
-                    student.setUsername(snapshot.getKey());
-                    student.setName(snap.child("name").getValue().toString());
-                    student.setSurname(snap.child("surname").getValue().toString());
-                    student.setAge((Integer) snap.child("age").getValue());
-                    list.add(student);
-                }*/
                 ad.notifyDataSetChanged();
             }
 

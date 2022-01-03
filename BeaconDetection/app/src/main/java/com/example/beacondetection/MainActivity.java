@@ -24,6 +24,7 @@ import android.widget.TextView;
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconManager;
 import org.altbeacon.beacon.BeaconParser;
+import org.altbeacon.beacon.Identifier;
 import org.altbeacon.beacon.MonitorNotifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
@@ -31,15 +32,22 @@ import org.altbeacon.beacon.Region;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import pl.droidsonroids.gif.GifImageView;
 import com.anthonyfdev.dropdownview.DropDownView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private TextView text_message;
     private ImageView BackgroundImage;
     private TextView LogoTitle;
+    private EditText username;
     private ImageView SuccessIcon;
     private GifImageView LoadingIcon;
     private Button menubutton1;
@@ -47,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private Button menubutton3;
     private Button menubutton4;
     private Button menubutton5;
+    private ArrayList<Lecture> next_lectures;
 
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
@@ -74,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
         menubutton5 = (Button) inflatedView.findViewById(R.id.menubutton5);
 
         SuccessIcon.setVisibility(View.INVISIBLE);
+
+        username = (EditText) findViewById(R.id.username);
 
         // drop down menu
         DropDownView dropdown = (DropDownView) findViewById(R.id.dropdown);
@@ -153,8 +164,29 @@ public class MainActivity extends AppCompatActivity {
                     if(beacon.getDistance() < 2) {
                         SuccessIcon.setVisibility(View.VISIBLE);
                         LoadingIcon.setVisibility(View.INVISIBLE);
-                        text_message.setText("Attending lecture in room " + beacons.iterator().next().getId2().toString() + "!");
-                        // room number = beacons.iterator().next().getId2()
+                        String beaconRoom = beacons.iterator().next().getId2().toString();
+                        text_message.setText("Attending lecture in room " + beaconRoom + "!");
+
+                        next_lectures = NextLectures.list;
+                        //System.out.println(next_lectures);
+                        String user = username.getText().toString();
+                        if(next_lectures != null) {
+                            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                            Date date = null;
+                            Date today = null;
+                            for (Lecture lec : next_lectures) {
+                                try {
+                                    today = df.parse(df.format(new Date()));
+                                    date = df.parse(lec.getDate());
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                if (date.equals(today) && lec.getRoom().equals(beaconRoom)) {
+                                    DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference("Lecture/"+lec.getCourse()+"/"+lec.getLecture());
+                                    reference.push().setValue(user);
+                                }
+                            }
+                        }
                     }
                     // developer message
                     Log.i(TAG, "The beacon I see is about "+beacon.getDistance()+" meters away.");
