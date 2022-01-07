@@ -12,6 +12,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView text_message;
     private ImageView BackgroundImage;
     private TextView LogoTitle;
-    private EditText username;
+    private EditText usernameEdit;
+    private static String username;
     private ImageView SuccessIcon;
     private GifImageView LoadingIcon;
     private Button menubutton1;
@@ -84,7 +87,12 @@ public class MainActivity extends AppCompatActivity {
 
         SuccessIcon.setVisibility(View.INVISIBLE);
 
-        username = (EditText) findViewById(R.id.username);
+        usernameEdit = (EditText) findViewById(R.id.username);
+        if(username == null) {
+            username = usernameEdit.getText().toString();
+        } else {
+            usernameEdit.setText(username);
+        }
 
         // drop down menu
         DropDownView dropdown = (DropDownView) findViewById(R.id.dropdown);
@@ -160,6 +168,9 @@ public class MainActivity extends AppCompatActivity {
         beaconManager.addRangeNotifier(new RangeNotifier() {
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+                if(username.equals("")) {
+                    return;
+                }
                 for (Beacon beacon: beacons) {
                     if(beacon.getDistance() < 2) {
                         SuccessIcon.setVisibility(View.VISIBLE);
@@ -168,8 +179,6 @@ public class MainActivity extends AppCompatActivity {
                         text_message.setText("Attending lecture in room " + beaconRoom + "!");
 
                         next_lectures = NextLectures.list;
-                        //System.out.println(next_lectures);
-                        String user = username.getText().toString();
                         if(next_lectures != null) {
                             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                             Date date = null;
@@ -183,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 if (date.equals(today) && lec.getRoom().equals(beaconRoom)) {
                                     DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference("Lecture/"+lec.getCourse()+"/"+lec.getLecture());
-                                    reference.push().setValue(user);
+                                    reference.push().setValue(username);
                                 }
                             }
                         }
@@ -197,25 +206,66 @@ public class MainActivity extends AppCompatActivity {
         beaconManager.startMonitoring(MonitoringRegion);
         // find close beacons
         beaconManager.startRangingBeacons(MonitoringRegion);
+
+        usernameEdit.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                text_message.setText("");
+                username = s.toString();
+
+            }
+        });
     }
     public void button1(View view) {
-        Intent courses = new Intent(MainActivity.this, MyCourses.class);
-        startActivity(courses);
+        if(isSetUsername()) {
+            Intent courses = new Intent(MainActivity.this, MyCourses.class);
+            startActivity(courses);
+        }
     }
     public void button2(View view) {
-        Intent next_lec = new Intent(MainActivity.this, NextLectures.class);
-        startActivity(next_lec);
+        if(isSetUsername()) {
+            Intent next_lec = new Intent(MainActivity.this, NextLectures.class);
+            startActivity(next_lec);
+        }
     }
     public void button3(View view) {
-        Intent past_lec = new Intent(MainActivity.this, PastLectures.class);
-        startActivity(past_lec);
+        if(isSetUsername()) {
+            Intent past_lec = new Intent(MainActivity.this, PastLectures.class);
+            startActivity(past_lec);
+        }
     }
     public void button4(View view) {
-        Intent stat = new Intent(MainActivity.this, Statistics.class);
-        startActivity(stat);
+        if(isSetUsername()) {
+            Intent stat = new Intent(MainActivity.this, Statistics.class);
+            startActivity(stat);
+        }
     }
     public void button5(View view) {
-        Intent acc = new Intent(MainActivity.this, Account.class);
-        startActivity(acc);
+        if(isSetUsername()) {
+            Intent acc = new Intent(MainActivity.this, Account.class);
+            startActivity(acc);
+        }
+    }
+
+    public Boolean isSetUsername() {
+        if(username.equals("")) {
+            text_message.setText("Please set username");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public static String getusername() {
+        return username;
     }
 }
