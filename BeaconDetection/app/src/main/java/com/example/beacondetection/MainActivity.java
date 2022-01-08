@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                         String beaconRoom = beacons.iterator().next().getId2().toString();
                         text_message.setText("Attending lecture in room " + beaconRoom + "!");
 
-                        // safe the attendance to the database, in progress!!!
+                        // save the attendance to the database, in progress!!!
                         next_lectures = NextLectures.list;
                         if(next_lectures != null) {
                             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
