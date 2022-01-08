@@ -39,9 +39,6 @@ public class Statistics extends AppCompatActivity {
     private PieChartView bar;
     private TextView text;
     private String username;
-    private ArrayList<Lecture> past_lectures;
-    private HashMap<String, Integer> map_attended;
-    private HashMap<String, Integer> map_total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,62 +54,25 @@ public class Statistics extends AppCompatActivity {
         text = new TextView(this);
         bar = new PieChartView(this);
 
+        // connect to database
         String path = "Attendance/" + username;
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
 
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @RequiresApi(api = Build.VERSION_CODES.N)
-//            @Override
-//            public void onDataChange(DataSnapshot snapshot) {
-//                // count attended lectures for each course
-//                for(DataSnapshot snap : snapshot.getChildren()) {
-//                    String course = snap.child("course").getValue().toString();
-//                    if (map_attended.containsKey(course)) {
-//                        int value = map_attended.get(course) + 1;
-//                        map_attended.replace(course, value);
-//                    } else {
-//                        map_attended.put(course, 1);
-//                    }
-//                }
-//                // count total lectures
-//                past_lectures = PastLectures.list;
-//                for(Lecture lec : past_lectures) {
-//                    String course = snap.child("course").getValue().toString();
-//                    if (map_attended.containsKey(course)) {
-//                        int value = map_attended.get(course) + 1;
-//                        map_attended.replace(course, value);
-//                    } else {
-//                        map_attended.put(course, 1);
-//                    }
-//                }
-//
-//                text.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-//                text.setText(snapshot.child("course").getValue().toString()); // Course name
-//                layout.addView(text);
-//
-//                int total_courses = past_lectures.size();
-//                int attended_courses = 0;
-//                int not_attended_courses = total_courses - attended_courses;
-//
-//                List<SliceValue> pieData = new ArrayList<>();
-//                pieData.add(new SliceValue(attended_courses, Color.GREEN));
-//                pieData.add(new SliceValue(not_attended_courses, Color.RED));
-//                PieChartData pieChartData = new PieChartData(pieData);
-//
-//                bar.setPieChartData(pieChartData);
-//                bar.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-//                bar.setMinimumWidth(500);
-//                bar.setMinimumHeight(500);
-//                layout.addView(bar);
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//
-//            }
-//        });
+        // template for attendance percentage, should be repeated for every attended course
+        text.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        text.setText("Course"); // Course name
+        layout.addView(text);
+
+        List<SliceValue> pieData = new ArrayList<>();
+        pieData.add(new SliceValue(75, Color.GREEN)); // setting sample data, should be attended courses
+        pieData.add(new SliceValue(25, Color.RED)); // not attended courses
+        PieChartData pieChartData = new PieChartData(pieData);
+
+        bar.setPieChartData(pieChartData);
+        bar.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        bar.setMinimumWidth(500);
+        bar.setMinimumHeight(500);
+        layout.addView(bar);
 
         // go back to MainActivity on back-button click
         back.setOnClickListener(new View.OnClickListener() {
