@@ -39,7 +39,7 @@ public class MyCourses extends AppCompatActivity {
 
         back = (ImageButton) findViewById(R.id.back);
         listview = (ListView) findViewById(R.id.list);
-        View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
+        //View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -88,7 +88,7 @@ public class NextLectures extends AppCompatActivity {
         recycler = (RecyclerView) findViewById(R.id.list);
         df = new SimpleDateFormat("dd/MM/yyyy");
         // get username
-        View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
+        //View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
