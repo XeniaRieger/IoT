@@ -45,6 +45,7 @@ public class Account extends AppCompatActivity {
         recycler.setHasFixedSize(true);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
+        // displays the student info in recycler view
         ad = new AccountAdapter(this, list);
         recycler.setAdapter(ad);
 
@@ -52,8 +53,10 @@ public class Account extends AppCompatActivity {
 
         String path = "Student/" + username;
 
+        // get connection to Firebase and get specified path
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
 
+        // get student data from database everytime data changes
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

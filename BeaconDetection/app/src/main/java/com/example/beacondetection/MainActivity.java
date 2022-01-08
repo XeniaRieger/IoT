@@ -40,19 +40,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
-    private static TextView text_message;
-    private static ImageView BackgroundImage;
-    private static TextView LogoTitle;
-    private static EditText usernameEdit;
+    private TextView text_message;
+    private ImageView BackgroundImage;
+    private TextView LogoTitle;
+    private EditText usernameEdit;
     private static String username;
-    private static ImageView SuccessIcon;
+    private ImageView SuccessIcon;
     private static GifImageView LoadingIcon;
-    private static Button menubutton1;
-    private static Button menubutton2;
-    private static Button menubutton3;
-    private static Button menubutton4;
-    private static Button menubutton5;
-    private ArrayList<Lecture> next_lectures;
+    private Button menubutton1;
+    private Button menubutton2;
+    private Button menubutton3;
+    private Button menubutton4;
+    private Button menubutton5;
+    private static ArrayList<Lecture> next_lectures;
 
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
@@ -187,25 +187,26 @@ public class MainActivity extends AppCompatActivity {
                         String beaconRoom = beacons.iterator().next().getId2().toString();
                         text_message.setText("Attending lecture in room " + beaconRoom + "!");
 
-                        // save the attendance to the database, in progress!!!
-                        next_lectures = NextLectures.list;
-                        if(next_lectures != null) {
-                            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                            Date date = null;
-                            Date today = null;
-                            for (Lecture lec : next_lectures) {
-                                try {
-                                    today = df.parse(df.format(new Date()));
-                                    date = df.parse(lec.getDate());
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                                if (date.equals(today) && lec.getRoom().equals(beaconRoom)) {
-                                    DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference("Lecture/"+lec.getCourse()+"/"+lec.getLecture());
-                                    reference.push().setValue(username);
-                                }
-                            }
-                        }
+                        // save the attendance to the database
+                        // to be tested and implemented more efficiently!
+//                        next_lectures = NextLectures.list;
+//                        if(next_lectures != null) {
+//                            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+//                            Date date = null;
+//                            Date today = null;
+//                            for (Lecture lec : next_lectures) {
+//                                try {
+//                                    today = df.parse(df.format(new Date()));
+//                                    date = df.parse(lec.getDate());
+//                                } catch (ParseException e) {
+//                                    e.printStackTrace();
+//                                }
+//                                if (date.equals(today) && lec.getRoom().equals(beaconRoom)) {
+//                                    DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference("Lecture/"+lec.getCourse()+"/"+lec.getLecture());
+//                                    reference.push().setValue(username);
+//                                }
+//                            }
+//                        }
                     }
                     // developer message
                     Log.i(TAG, "The beacon I see is about "+beacon.getDistance()+" meters away.");
@@ -236,30 +237,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    // My Courses
     public void button1(View view) {
         if(isSetUsername()) {
             Intent courses = new Intent(MainActivity.this, MyCourses.class);
             startActivity(courses);
         }
     }
+    // Next lectures
     public void button2(View view) {
-        if(isSetUsername()) {
+        if (isSetUsername()) {
             Intent next_lec = new Intent(MainActivity.this, NextLectures.class);
             startActivity(next_lec);
         }
     }
+    // Past lectures
     public void button3(View view) {
         if(isSetUsername()) {
             Intent past_lec = new Intent(MainActivity.this, PastLectures.class);
             startActivity(past_lec);
         }
     }
+    // Statistics
     public void button4(View view) {
         if(isSetUsername()) {
             Intent stat = new Intent(MainActivity.this, Statistics.class);
             startActivity(stat);
         }
     }
+    // Account
     public void button5(View view) {
         if(isSetUsername()) {
             Intent acc = new Intent(MainActivity.this, Account.class);

@@ -45,13 +45,16 @@ public class MyCourses extends AppCompatActivity {
         });
 
         list = new ArrayList<>();
+        // displays the lecture info in recycler view
         ad = new ArrayAdapter<String>(this, R.layout.course_items, R.id.course, list);
         listview.setAdapter(ad);
 
         String path = "Lectures/" + username;
 
+        // get connection to Firebase and get specified path
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
 
+        // get lecture data from database everytime data changes
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

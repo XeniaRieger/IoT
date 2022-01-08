@@ -52,14 +52,17 @@ public class NextLectures extends AppCompatActivity {
         recycler.setHasFixedSize(true);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
+        // displays the lecture info in recycler view
         ad = new LectureAdapter(this, list);
         recycler.setAdapter(ad);
 
         String path = "Lectures/"  + username;
 
+        // get connection to Firebase and get specified path
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
         //Toast.makeText(this, "Firebase connection successful", Toast.LENGTH_LONG).show();
 
+        // get lecture data from database everytime data changes
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
