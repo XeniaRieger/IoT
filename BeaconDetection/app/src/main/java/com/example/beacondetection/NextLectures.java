@@ -25,17 +25,38 @@ import java.util.Date;
 public class NextLectures extends AppCompatActivity {
 
     private ImageButton back;
-    public RecyclerView recycler;
+    private RecyclerView recycler;
     private LectureAdapter ad;
-    private ArrayList<Lecture> list;
+    public static ArrayList<Lecture> list;
     public SimpleDateFormat df;
+    private String username;
 
-    public ArrayList<Lecture> getList() {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_next_lectures);
+
+        back = (ImageButton) findViewById(R.id.back);
+        recycler = (RecyclerView) findViewById(R.id.list);
+        df = new SimpleDateFormat("dd/MM/yyyy");
+        // get username
+        username = MainActivity.getusername();
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent start = new Intent(NextLectures.this, MainActivity.class);
+                startActivity(start);
+            }
+        });
+
+        recycler.setHasFixedSize(true);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
         ad = new LectureAdapter(this, list);
         recycler.setAdapter(ad);
 
-        String path = "Lectures/" + MainActivity.getUser();
+        String path = "Lectures/"  + username;
 
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
         //Toast.makeText(this, "Firebase connection successful", Toast.LENGTH_LONG).show();
@@ -56,7 +77,7 @@ public class NextLectures extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         //TIME STILL TO MANAGE
-                        if(date.after(today) || date.equals(today)) {
+                        if(date.after(today)) {
                             Lecture lecture = new Lecture();
                             lecture.setCourse(course);
                             lecture.setLecture(snap1.getKey());
@@ -76,32 +97,5 @@ public class NextLectures extends AppCompatActivity {
 
             }
         });
-        return list;
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_next_lectures);
-
-        back = (ImageButton) findViewById(R.id.back);
-        recycler = (RecyclerView) findViewById(R.id.list);
-        df = new SimpleDateFormat("dd/MM/yyyy");
-        // get username
-        //View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent start = new Intent(NextLectures.this, MainActivity.class);
-                startActivity(start);
-            }
-        });
-
-        recycler.setHasFixedSize(true);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-
-        this.getList();
-    }
-
 }
