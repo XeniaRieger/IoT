@@ -31,8 +31,6 @@ public class MyCourses extends AppCompatActivity {
     private ListView listview;
     private ArrayAdapter ad;
     private ArrayList<String> list;
-    private EditText username;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +39,7 @@ public class MyCourses extends AppCompatActivity {
 
         back = (ImageButton) findViewById(R.id.back);
         listview = (ListView) findViewById(R.id.list);
-        // get username
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
-        username = (EditText) inflatedView.findViewById(R.id.username);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +53,7 @@ public class MyCourses extends AppCompatActivity {
         ad = new ArrayAdapter<String>(this, R.layout.course_items, R.id.course, list);
         listview.setAdapter(ad);
 
-        String path = "Lectures/" + username.getText().toString();;
+        String path = "Lectures/" + MainActivity.getUser();
 
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
 

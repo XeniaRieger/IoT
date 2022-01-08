@@ -36,7 +36,6 @@ public class Statistics extends AppCompatActivity {
     private LinearLayout layout;
     private PieChartView bar;
     private TextView text;
-    private EditText username;
     private ArrayList<Lecture> past_lectures;
 
     @Override
@@ -50,17 +49,16 @@ public class Statistics extends AppCompatActivity {
         layout = (LinearLayout) findViewById(R.id.layout);
         // get username
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
-        username = (EditText) inflatedView.findViewById(R.id.username);
         text = new TextView(this);
         bar = new PieChartView(this);
 
-        String path = "Student/" + username.getText().toString();
+        String path = "Student/" + MainActivity.getUser();
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                list.clear();
+                /*list.clear();
                 Student student = new Student();
                 student.setUsername(snapshot.getKey());
                 student.setName(snapshot.child("name").getValue().toString());
@@ -68,10 +66,10 @@ public class Statistics extends AppCompatActivity {
                 student.setAge(snapshot.child("age").getValue().toString());
                 list.add(student);
 
-                past_lectures = NextLectures.list;
+                past_lectures = NextLectures.list;*/
 
                 text.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                text.setText(); // Course name
+                //text.setText(); // Course name
                 layout.addView(text);
 
                 List<SliceValue> pieData = new ArrayList<>();

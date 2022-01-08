@@ -29,7 +29,6 @@ public class PastLectures extends AppCompatActivity {
     private LectureAdapter ad;
     private ArrayList<Lecture> list;
     public SimpleDateFormat df;
-    private EditText username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +38,8 @@ public class PastLectures extends AppCompatActivity {
         back = (ImageButton) findViewById(R.id.back);
         recycler = (RecyclerView) findViewById(R.id.list);
         df = new SimpleDateFormat("dd/MM/yyyy");
-        // get username
+
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
-        username = (EditText) inflatedView.findViewById(R.id.username);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +55,7 @@ public class PastLectures extends AppCompatActivity {
         ad = new LectureAdapter(this, list);
         recycler.setAdapter(ad);
 
-        String path = "Lectures/"  + username.getText().toString();;
+        String path = "Lectures/"  + MainActivity.getUser();
 
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
 
@@ -78,7 +76,7 @@ public class PastLectures extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         //TIME STILL TO MANAGE
-                        if(date.before(today) || date.equals(today)) {
+                        if(date.before(today)) {
                             Lecture lecture = new Lecture();
                             lecture.setCourse(course);
                             lecture.setLecture(snap1.getKey());
