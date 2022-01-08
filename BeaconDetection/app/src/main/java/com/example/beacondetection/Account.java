@@ -30,6 +30,7 @@ public class Account extends AppCompatActivity {
     private RecyclerView recycler;
     private AccountAdapter ad;
     private ArrayList<Student> list;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +39,6 @@ public class Account extends AppCompatActivity {
 
         back = (ImageButton) findViewById(R.id.back);
         recycler = (RecyclerView) findViewById(R.id.list);
-
-        // get username
-        //View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +54,9 @@ public class Account extends AppCompatActivity {
         ad = new AccountAdapter(this, list);
         recycler.setAdapter(ad);
 
-        String path = "Student/" + MainActivity.getUser();
+        username = MainActivity.getusername();
+
+        String path = "Student/" + username;
 
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
         //Toast.makeText(this, "Firebase connection successful", Toast.LENGTH_LONG).show();
