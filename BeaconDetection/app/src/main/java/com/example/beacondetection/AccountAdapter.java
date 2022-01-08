@@ -16,11 +16,13 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.MyViewHo
     Context context;
     ArrayList<Student> list;
 
+    //Adapter to display students in a recycler view
     public AccountAdapter(Context context, ArrayList<Student> list) {
         this.context = context;
         this.list = list;
     }
 
+    //MyViewHolder is a RecyclerView class that describes how to display items in a recyclerview
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

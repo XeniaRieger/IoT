@@ -16,11 +16,13 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.MyViewHo
     Context context;
     ArrayList<Lecture> list;
 
+    //Adapter to display lectures in a recycler view
     public LectureAdapter(Context context, ArrayList<Lecture> list) {
         this.context = context;
         this.list = list;
     }
 
+    //MyViewHolder is a RecyclerView class that describes how to display items in a recycler view
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
