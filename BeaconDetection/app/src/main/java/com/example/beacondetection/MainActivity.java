@@ -9,7 +9,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,23 +16,20 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconManager;
 import org.altbeacon.beacon.BeaconParser;
-import org.altbeacon.beacon.Identifier;
 import org.altbeacon.beacon.MonitorNotifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
-import java.net.URISyntaxException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,12 +49,18 @@ public class MainActivity extends AppCompatActivity {
     private static String username;
     private ImageView SuccessIcon;
     private GifImageView LoadingIcon;
+    private ImageButton submit;
+    private static String user;
     private Button menubutton1;
     private Button menubutton2;
     private Button menubutton3;
     private Button menubutton4;
     private Button menubutton5;
-    private ArrayList<Lecture> next_lectures;
+    private ArrayList<Lecture> next_lectures; //TO DELETE
+
+    public static String getUser() {
+        return user;
+    }
 
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
@@ -87,12 +89,19 @@ public class MainActivity extends AppCompatActivity {
 
         SuccessIcon.setVisibility(View.INVISIBLE);
 
-        usernameEdit = (EditText) findViewById(R.id.username);
-        if(username == null) {
-            username = usernameEdit.getText().toString();
-        } else {
-            usernameEdit.setText(username);
-        }
+        submit = (ImageButton) findViewById(R.id.submit);
+        username = (EditText) findViewById(R.id.username);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user = username.getText().toString();
+                System.out.println(user);
+                username.onEditorAction(EditorInfo.IME_ACTION_DONE);
+                username.setVisibility(View.INVISIBLE);
+                submit.setVisibility(View.INVISIBLE);
+            }
+        });
 
         // drop down menu
         DropDownView dropdown = (DropDownView) findViewById(R.id.dropdown);
@@ -113,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         beaconManager = BeaconManager.getInstanceForApplication(this);
 
@@ -179,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
                         text_message.setText("Attending lecture in room " + beaconRoom + "!");
 
                         next_lectures = NextLectures.list;
+
                         if(next_lectures != null) {
                             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                             Date date = null;
@@ -190,9 +199,9 @@ public class MainActivity extends AppCompatActivity {
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
-                                if (date.equals(today) && lec.getRoom().equals(beaconRoom)) {
-                                    DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference("Lecture/"+lec.getCourse()+"/"+lec.getLecture());
-                                    reference.push().setValue(username);
+                                if (date.equals(today) && lec.getRoom().equalsIgnoreCase(beaconRoom)) {
+                                    DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference("Attendance/"+lec.getCourse()+"/"+lec.getLecture());
+                                    reference.push().setValue(user);
                                 }
                             }
                         }
@@ -224,6 +233,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //TO REGISTER THE ATTENDANCE, NOT COMPLETED YET, TO PUT AS A WORK IN PROGRESS IN THE REPORT
+    public void registerAttendance(ArrayList<Lecture> next_lec){
+
+        if(next_lec != null) {
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = null;
+            Date today = null;
+            for (Lecture lec : next_lec) {
+                try {
+                    today = df.parse(df.format(new Date()));
+                    date = df.parse(lec.getDate());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (date.equals(today) && lec.getRoom().equalsIgnoreCase("dl40")) {
+                    DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference("Attendance/"+lec.getCourse()+"/"+lec.getLecture());
+                    reference.push().setValue(user);
+                }
+            }
+        }
+    }
+
     public void button1(View view) {
         if(isSetUsername()) {
             Intent courses = new Intent(MainActivity.this, MyCourses.class);

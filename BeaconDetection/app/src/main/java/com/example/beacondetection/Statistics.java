@@ -39,7 +39,7 @@ public class Statistics extends AppCompatActivity {
     private LinearLayout layout;
     private PieChartView bar;
     private TextView text;
-    private String username;
+
     private ArrayList<Lecture> past_lectures;
     private HashMap<String, Integer> map_attended;
     private HashMap<String, Integer> map_total;
@@ -53,12 +53,13 @@ public class Statistics extends AppCompatActivity {
         scroll = (ScrollView) findViewById(R.id.scroll);
         titletext = (TextView) findViewById(R.id.titletext);
         layout = (LinearLayout) findViewById(R.id.layout);
-        // get username
-        username = MainActivity.getusername();
+
+        //View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
+       
         text = new TextView(this);
         bar = new PieChartView(this);
 
-        String path = "Attendance/" + username;
+        String path = "Student/" + MainActivity.getUser();
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
 
 //        reference.addValueEventListener(new ValueEventListener() {

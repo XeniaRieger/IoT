@@ -85,10 +85,11 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
         android:ems="10"
         android:hint="Enter your username"
+        android:imeOptions="actionDone"
         android:inputType="textPersonName"
-
         android:paddingStart="20sp"
         android:paddingTop="20sp"
         android:paddingEnd="20sp"
@@ -97,8 +98,24 @@
         android:textColorHint="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/SuccessIcon"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LogoTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/LogoTitle"
+        app:layout_constraintVertical_bias="0.533" />
+
+    <ImageButton
+        android:id="@+id/submit"
+        android:layout_width="70dp"
+        android:layout_height="67dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="89dp"
+        android:backgroundTint="#3F51B5"
+        android:contentDescription="submit button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toEndOf="@+id/username"
+        app:layout_constraintTop_toTopOf="@+id/LogoTitle"
+        app:srcCompat="@android:drawable/ic_menu_send"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
