@@ -7,10 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,11 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 
 public class Account extends AppCompatActivity {
 
@@ -40,6 +33,7 @@ public class Account extends AppCompatActivity {
         back = (ImageButton) findViewById(R.id.back);
         recycler = (RecyclerView) findViewById(R.id.list);
 
+        // go back to MainActivity on back-button click
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,12 +48,11 @@ public class Account extends AppCompatActivity {
         ad = new AccountAdapter(this, list);
         recycler.setAdapter(ad);
 
-        username = MainActivity.getusername();
+        username = MainActivity.getUsername();
 
         String path = "Student/" + username;
 
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
-        //Toast.makeText(this, "Firebase connection successful", Toast.LENGTH_LONG).show();
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

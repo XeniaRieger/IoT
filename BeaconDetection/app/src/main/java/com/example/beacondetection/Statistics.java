@@ -1,6 +1,5 @@
 package com.example.beacondetection;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -53,8 +52,8 @@ public class Statistics extends AppCompatActivity {
         scroll = (ScrollView) findViewById(R.id.scroll);
         titletext = (TextView) findViewById(R.id.titletext);
         layout = (LinearLayout) findViewById(R.id.layout);
-        // get username
-        username = MainActivity.getusername();
+
+        username = MainActivity.getUsername();
         text = new TextView(this);
         bar = new PieChartView(this);
 
@@ -115,6 +114,7 @@ public class Statistics extends AppCompatActivity {
 //            }
 //        });
 
+        // go back to MainActivity on back-button click
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

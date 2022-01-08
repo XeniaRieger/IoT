@@ -9,7 +9,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,20 +19,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconManager;
 import org.altbeacon.beacon.BeaconParser;
-import org.altbeacon.beacon.Identifier;
 import org.altbeacon.beacon.MonitorNotifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
-import java.net.URISyntaxException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,25 +40,27 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView text_message;
-    private ImageView BackgroundImage;
-    private TextView LogoTitle;
-    private EditText usernameEdit;
+    private static TextView text_message;
+    private static ImageView BackgroundImage;
+    private static TextView LogoTitle;
+    private static EditText usernameEdit;
     private static String username;
-    private ImageView SuccessIcon;
-    private GifImageView LoadingIcon;
-    private Button menubutton1;
-    private Button menubutton2;
-    private Button menubutton3;
-    private Button menubutton4;
-    private Button menubutton5;
+    private static ImageView SuccessIcon;
+    private static GifImageView LoadingIcon;
+    private static Button menubutton1;
+    private static Button menubutton2;
+    private static Button menubutton3;
+    private static Button menubutton4;
+    private static Button menubutton5;
     private ArrayList<Lecture> next_lectures;
 
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
 
     private BeaconManager beaconManager = null;
-    protected static final String TAG = "MonitoringActivity";
+    private static final String TAG = "MonitoringActivity"; // source of the logged messages later, for debugging
+
+    private String usernameWarning;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -78,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         SuccessIcon = (ImageView) findViewById(R.id.SuccessIcon);
         LoadingIcon = (GifImageView) findViewById(R.id.LoadingIcon);
 
+        // get buttons from the drop-down menu
         View inflatedView = getLayoutInflater().inflate(R.layout.footer, null);
         menubutton1 = (Button) inflatedView.findViewById(R.id.menubutton1);
         menubutton2 = (Button) inflatedView.findViewById(R.id.menubutton2);
@@ -85,14 +82,19 @@ public class MainActivity extends AppCompatActivity {
         menubutton4 = (Button) inflatedView.findViewById(R.id.menubutton4);
         menubutton5 = (Button) inflatedView.findViewById(R.id.menubutton5);
 
+        // only show this icon when beacons are detected
         SuccessIcon.setVisibility(View.INVISIBLE);
 
+        // if the start page is accessed from another page keep the username from before
         usernameEdit = (EditText) findViewById(R.id.username);
         if(username == null) {
             username = usernameEdit.getText().toString();
         } else {
             usernameEdit.setText(username);
         }
+
+        // message to show when user wants to proceed with unset username
+        usernameWarning = "Please set username";
 
         // drop down menu
         DropDownView dropdown = (DropDownView) findViewById(R.id.dropdown);
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         dropdown.setHeaderView(collapsedView);
         dropdown.setExpandedView(expandedView);
 
+        // click on menu shows buttons
         collapsedView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,13 +117,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         beaconManager = BeaconManager.getInstanceForApplication(this);
 
-        // ask for permission to use location
-        // check if SDK is new enough
+        // ask user for permission to use location on first entering the app
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // check if permission is specified in android manifest
             if (this.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                // check if permission was already granted
                 if (this.checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle("This app needs background location access");
@@ -141,10 +144,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        // no grouping IDs as we only define one MonitoringRegion
         Region MonitoringRegion = new Region("MonitoringBeacons", null, null, null);
-        // depends on Beacon type
+        // depends on Beacon type, we use iBeacons layout (for other types: change the string accordingly)
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
 
+        // detects beacons in a range of 70 meters
         beaconManager.addMonitorNotifier(new MonitorNotifier() {
             @Override
             public void didEnterRegion(Region region) {
@@ -165,19 +170,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // provides a collection of all detected beacons -> only work with close beacons
         beaconManager.addRangeNotifier(new RangeNotifier() {
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+                // do not do anything if username is not set
                 if(username.equals("")) {
                     return;
                 }
+                // check distance for every beacon
                 for (Beacon beacon: beacons) {
                     if(beacon.getDistance() < 2) {
+                        // show the user that a beacon is detected
                         SuccessIcon.setVisibility(View.VISIBLE);
                         LoadingIcon.setVisibility(View.INVISIBLE);
                         String beaconRoom = beacons.iterator().next().getId2().toString();
                         text_message.setText("Attending lecture in room " + beaconRoom + "!");
 
+                        // save the attendance to the database, in progress!!!
                         next_lectures = NextLectures.list;
                         if(next_lectures != null) {
                             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -204,9 +214,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         beaconManager.startMonitoring(MonitoringRegion);
-        // find close beacons
         beaconManager.startRangingBeacons(MonitoringRegion);
 
+        // remove message 'set username' when username is set and save username
         usernameEdit.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -218,7 +228,9 @@ public class MainActivity extends AppCompatActivity {
 
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                text_message.setText("");
+                if(text_message.getText().equals(usernameWarning)) {
+                    text_message.setText("");
+                }
                 username = s.toString();
 
             }
@@ -257,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
 
     public Boolean isSetUsername() {
         if(username.equals("")) {
-            text_message.setText("Please set username");
+            text_message.setText(usernameWarning);
             return false;
         }
         else {
@@ -265,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static String getusername() {
+    public static String getUsername() {
         return username;
     }
 }
