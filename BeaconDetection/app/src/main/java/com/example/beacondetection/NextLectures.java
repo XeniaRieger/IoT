@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.firebase.database.DataSnapshot;
@@ -39,9 +38,9 @@ public class NextLectures extends AppCompatActivity {
         back = (ImageButton) findViewById(R.id.back);
         recycler = (RecyclerView) findViewById(R.id.list);
         df = new SimpleDateFormat("dd/MM/yyyy");
-        // get username
-        username = MainActivity.getusername();
+        username = MainActivity.getUsername();
 
+        // go back to MainActivity on back-button click
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

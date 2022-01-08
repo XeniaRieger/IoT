@@ -1,19 +1,13 @@
 package com.example.beacondetection;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,7 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class MyCourses extends AppCompatActivity {
 
@@ -33,7 +26,6 @@ public class MyCourses extends AppCompatActivity {
     private ArrayList<String> list;
     private String username;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +33,9 @@ public class MyCourses extends AppCompatActivity {
 
         back = (ImageButton) findViewById(R.id.back);
         listview = (ListView) findViewById(R.id.list);
-        // get username
-        username = MainActivity.getusername();
+        username = MainActivity.getUsername();
 
+        // go back to MainActivity on back-button click
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
