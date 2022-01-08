@@ -204,6 +204,8 @@ public class MainActivity extends AppCompatActivity {
 //                                if (date.equals(today) && lec.getRoom().equals(beaconRoom)) {
 //                                    DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference("Lecture/"+lec.getCourse()+"/"+lec.getLecture());
 //                                    reference.push().setValue(username);
+//                                }else{
+//                                    System.out.println("No lecture found!");
 //                                }
 //                            }
 //                        }
