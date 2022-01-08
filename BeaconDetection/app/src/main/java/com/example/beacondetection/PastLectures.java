@@ -39,7 +39,7 @@ public class PastLectures extends AppCompatActivity {
         recycler = (RecyclerView) findViewById(R.id.list);
         df = new SimpleDateFormat("dd/MM/yyyy");
 
-        //View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null); try
+        //View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
