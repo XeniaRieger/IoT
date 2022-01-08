@@ -39,7 +39,6 @@ public class MyCourses extends AppCompatActivity {
 
         back = (ImageButton) findViewById(R.id.back);
         listview = (ListView) findViewById(R.id.list);
-        View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +51,7 @@ public class MyCourses extends AppCompatActivity {
         list = new ArrayList<>();
         ad = new ArrayAdapter<String>(this, R.layout.course_items, R.id.course, list);
         listview.setAdapter(ad);
-
+      
         String path = "Lectures/" + MainActivity.getUser();
 
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);

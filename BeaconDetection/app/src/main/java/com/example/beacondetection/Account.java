@@ -38,8 +38,9 @@ public class Account extends AppCompatActivity {
 
         back = (ImageButton) findViewById(R.id.back);
         recycler = (RecyclerView) findViewById(R.id.list);
+
         // get username
-        View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
+        //View inflatedView = getLayoutInflater().inflate(R.layout.activity_main, null);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
