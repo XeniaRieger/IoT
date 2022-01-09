@@ -49,7 +49,7 @@ public class MyCourses extends AppCompatActivity {
         ad = new ArrayAdapter<String>(this, R.layout.course_items, R.id.course, list);
         listview.setAdapter(ad);
 
-        String path = "Lectures/" + username;
+        String path = "Courses/" + username;
 
         // get connection to Firebase and get specified path
         DatabaseReference reference = FirebaseDatabase.getInstance("https://iotprojectg4-79ffa-default-rtdb.firebaseio.com/").getReference(path);
@@ -60,7 +60,7 @@ public class MyCourses extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 list.clear();
                 for(DataSnapshot snap: snapshot.getChildren()) {
-                    list.add(snap.getKey().toString());
+                    list.add(snap.getValue().toString());
                 }
                 Collections.sort(list);
                 ad.notifyDataSetChanged();
